@@ -12,7 +12,7 @@
     "keywords": [
         "gramio",
         "storage",
-        "in-memory"
+        "redis"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.7",
