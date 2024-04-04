@@ -1,0 +1,28 @@
+{
+    "name": "@gramio/storage-redis",
+    "version": "0.0.1",
+    "description": "Redis Storage for GramIO",
+    "main": "dist/index.js",
+    "type": "commonjs",
+    "homepage": "https://github.com/gramiojs/storage",
+    "readme": "https://gramio.netlify.app/",
+    "scripts": {
+        "prepublishOnly": "tsc && bunx tsc-alias"
+    },
+    "keywords": [
+        "gramio",
+        "storage",
+        "in-memory"
+    ],
+    "devDependencies": {
+        "@types/bun": "^1.0.7",
+        "typescript": "^5.3.3"
+    },
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "@gramio/storage": "^0.0.1",
+        "ioredis": "^5.3.2"
+    }
+}
