@@ -11,7 +11,7 @@ export function inMemoryStorage(): Storage {
 			return storage.has(key);
 		},
 		set(key, value) {
-			storage.set(key, value);
+			storage.set(key, { data: value });
 		},
 		delete(key) {
 			return storage.delete(key);

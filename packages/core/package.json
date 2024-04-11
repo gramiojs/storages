@@ -1,6 +1,6 @@
 {
     "name": "@gramio/storage",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Storage core for GramIO",
     "main": "dist/index.js",
     "type": "commonjs",
