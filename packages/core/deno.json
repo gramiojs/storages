@@ -1,0 +1,8 @@
+{
+    "name": "@gramio/storage",
+    "version": "0.0.3",
+    "exports": "./src/index.ts",
+    "publish": {
+        "include": ["deno.json", "src", "README.md", "tsconfig.json"]
+    }
+}

@@ -1,13 +1,13 @@
 {
     "name": "@gramio/storage",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Storage core for GramIO",
     "main": "dist/index.js",
     "type": "commonjs",
     "homepage": "https://github.com/gramiojs/storage",
     "readme": "https://gramio.netlify.app/",
     "scripts": {
-        "prepublishOnly": "bunx tsc && bunx tsc-alias"
+        "prepublishOnly": "bunx tsc"
     },
     "keywords": [
         "gramio",
@@ -15,8 +15,8 @@
         "in-memory"
     ],
     "devDependencies": {
-        "@types/bun": "^1.0.7",
-        "typescript": "^5.3.3"
+        "@types/bun": "^1.1.1",
+        "typescript": "^5.4.5"
     },
     "files": [
         "dist"
