@@ -1,5 +1,6 @@
-import type { Storage } from "types";
+import type { Storage } from "./types";
 
+/** in memory storage. Can be used by **default** in plugins */
 export function inMemoryStorage(): Storage {
 	const storage = new Map<string, { data: any }>();
 
