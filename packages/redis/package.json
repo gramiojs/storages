@@ -19,11 +19,12 @@
 	"homepage": "https://github.com/gramiojs/storages",
 	"readme": "https://github.com/gramiojs/storages",
 	"scripts": {
-		"prepublishOnly": "bunx tsc && bunx tsc-alias"
+		"prepublishOnly": "bunx tsc && bunx pkgroll"
 	},
-	"keywords": ["gramio", "gramio-storage", "storage", "redis"],
+	"keywords": ["gramio", "gramio-storage", "storage", "redis", "ioredis"],
 	"devDependencies": {
 		"@types/bun": "^1.1.13",
+		"pkgroll": "^2.5.1",
 		"typescript": "^5.7.2"
 	},
 	"files": ["dist"],
