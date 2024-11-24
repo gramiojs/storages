@@ -1,6 +1,9 @@
 /** Util helper to set that the value can be Promise or not */
 type MaybePromise<T> = Promise<T> | T;
 
+/** Type of in memory storage map */
+export type InMemoryStorageMap<T = any> = Map<string, { data: T }>;
+
 /**
  * Type of base storage which should implement all of storages
  *

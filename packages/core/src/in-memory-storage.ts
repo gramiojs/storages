@@ -1,8 +1,8 @@
-import type { Storage } from "./types.js";
+import type { InMemoryStorageMap, Storage } from "./types.js";
 
 /** in memory storage. Can be used by **default** in plugins */
-export function inMemoryStorage(): Storage {
-	const storage = new Map<string, { data: any }>();
+export function inMemoryStorage(map?: InMemoryStorageMap): Storage {
+	const storage: InMemoryStorageMap = map ?? new Map();
 
 	return {
 		get(key) {
