@@ -15,3 +15,5 @@ Storage adapters for GramIO
 ## TODO:
 
 -   Setup publish workflow for monorepo
+-   Maybe use exports instead of different packages?
+-   Think more about dependencies versioning (such as `ioredis`)
