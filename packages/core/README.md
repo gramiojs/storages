@@ -6,7 +6,7 @@
 
 Core of storage adapters.
 
-Read more in [documentation](https://gramio.netlify.app/storages/).
+Read more in [documentation](https://gramio.dev/storages/).
 
 ## How to write my own storage adapters
 
@@ -72,3 +72,16 @@ export function myOwnPlugin(options: MyOwnPluginOptions = {}) {
 
 > [!IMPORTANT]
 > You can scaffold this example by [create-gramio-plugin](/plugins/how-to-write.html#scaffolding-the-plugin)
+
+## Built-in In-memory-storage
+
+You can use built-in in-memory storage if you want to store data directly in memory.
+Be careful, as it is not stateless and data will be lost on reload.
+
+```ts
+import { type InMemoryStorageMap, inMemoryStorage } from "@gramio/storage";
+
+const map: InMemoryStorageMap = new Map(); // this is optional
+
+const storage = inMemoryStorage(map);
+```
