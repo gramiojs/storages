@@ -1,4 +1,4 @@
-import type { Storage } from "./types";
+import type { Storage } from "./types.js";
 
 /** in memory storage. Can be used by **default** in plugins */
 export function inMemoryStorage(): Storage {
