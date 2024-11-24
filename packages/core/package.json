@@ -1,39 +1,32 @@
 {
-    "name": "@gramio/storage",
-    "version": "1.0.0",
-    "description": "Storage core for GramIO with in memory built-in",
-    "main": "./dist/index.cjs",
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        "import": {
-            "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
-        },
-        "require": {
-            "types": "./dist/index.d.cts",
-            "default": "./dist/index.cjs"
-        }
-    },
-    "type": "module",
-    "homepage": "https://github.com/gramiojs/storages",
-    "readme": "https://gramio.dev/storages",
-    "scripts": {
-        "prepublishOnly": "bunx tsc && bunx pkgroll"
-    },
-    "keywords": [
-        "gramio",
-        "telegram-bot-api",
-        "storage",
-        "in-memory"
-    ],
-    "devDependencies": {
-        "@types/bun": "^1.1.1",
-        "pkgroll": "^2.5.1",
-        "typescript": "^5.7.2"
-    },
-    "license": "MIT",
-    "files": [
-        "dist"
-    ]
+	"name": "@gramio/storage",
+	"version": "1.0.0",
+	"description": "Storage core for GramIO with in memory built-in",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		"import": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"require": {
+			"types": "./dist/index.d.cts",
+			"default": "./dist/index.cjs"
+		}
+	},
+	"type": "module",
+	"homepage": "https://github.com/gramiojs/storages",
+	"readme": "https://gramio.dev/storages",
+	"scripts": {
+		"prepublishOnly": "bunx tsc && bun test && bunx pkgroll"
+	},
+	"keywords": ["gramio", "telegram-bot-api", "storage", "in-memory"],
+	"devDependencies": {
+		"@types/bun": "^1.1.1",
+		"pkgroll": "^2.5.1",
+		"typescript": "^5.7.2"
+	},
+	"license": "MIT",
+	"files": ["dist"]
 }
