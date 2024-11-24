@@ -1,5 +1,7 @@
 {
-  "dependencies": {},
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@biomejs/biome": "1.6.4"
   }
