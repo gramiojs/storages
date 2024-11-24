@@ -17,9 +17,9 @@
 	},
 	"type": "module",
 	"homepage": "https://github.com/gramiojs/storages",
-	"readme": "https://github.com/gramiojs/storages",
+	"readme": "https://gramio.dev/storages",
 	"scripts": {
-		"prepublishOnly": "bunx tsc && bun test && bunx pkgroll"
+		"prepublishOnly": "bunx tsc && bun test && bun ./scripts/release-jsr.ts && bunx pkgroll"
 	},
 	"keywords": ["gramio", "gramio-storage", "storage", "redis", "ioredis"],
 	"devDependencies": {

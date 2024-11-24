@@ -1,0 +1,13 @@
+{
+    "name": "@gramio/storage-redis",
+    "version": "1.0.0",
+    "exports": "./src/index.ts",
+    "publish": {
+        "include": [
+            "deno.json",
+            "src",
+            "README.md",
+            "LICENSE"
+        ]
+    }
+}
