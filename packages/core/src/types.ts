@@ -35,7 +35,7 @@ type MaybePromise<T> = Promise<T> | T;
  * }
  * ```
  * */
-export interface Storage {
+export interface Storage<Data = any> {
 	/**
 	 * `get` value from a storage.
 	 * @example
@@ -43,7 +43,8 @@ export interface Storage {
 	 * const data = await storage.get<string>("key");
 	 * ```
 	 * */
-	get<T = any>(key: string): MaybePromise<T | undefined>;
+	// TODO: allow override return type
+	get<T = Data>(key: string): MaybePromise<Data | undefined>;
 	/**
 	 * `set` value to a storage by the key.
 	 * @example
@@ -51,7 +52,7 @@ export interface Storage {
 	 * await storage.set("key", { value: true });
 	 * ```
 	 * */
-	set(key: string, value: any): MaybePromise<void>;
+	set(key: string, value: Data): MaybePromise<void>;
 	/**
 	 * `has` storage value by the key?
 	 * @example
