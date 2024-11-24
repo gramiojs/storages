@@ -20,8 +20,10 @@ export function redisStorage(options: RedisStorageOptions = {}): Storage {
 			return !!(await storage.get(key));
 		},
 		async set(key, value) {
-			await storage.set(key, JSON.stringify(value));
-			if (options.ttl) await storage.expire(key, options.ttl);
+			const data = JSON.stringify(value);
+
+			if (options.ttl) await storage.setex(key, options.ttl, data);
+			else await storage.set(key, data);
 		},
 		async delete(key) {
 			const result = await storage.del(key);
