@@ -75,7 +75,7 @@ describe("redisStorage", () => {
 
 	it("should respect the TTL option", async () => {
 		const ttlOptions: RedisStorageOptions = {
-			ttl: 1,
+			$ttl: 1,
 		};
 		const storage = redisStorage(ttlOptions);
 

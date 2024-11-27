@@ -3,12 +3,17 @@ import Redis, { type RedisOptions } from "ioredis";
 
 export interface RedisStorageOptions extends RedisOptions {
 	/** time to live in seconds */
-	ttl?: number;
+	$ttl?: number;
 }
 
-export function redisStorage(options: RedisStorageOptions = {}): Storage {
+export function redisStorage(
+	optionsRaw: RedisStorageOptions | Redis = {},
+): Storage {
+	const isInstanceInOption = optionsRaw instanceof Redis;
+	const options = isInstanceInOption ? {} : optionsRaw;
 	options.keyPrefix = options.keyPrefix ?? "@gramio/storage:";
-	const storage = new Redis(options);
+	const storage = isInstanceInOption ? optionsRaw : new Redis(options);
+
 
 	return {
 		async get(key) {
@@ -22,7 +27,7 @@ export function redisStorage(options: RedisStorageOptions = {}): Storage {
 		async set(key, value) {
 			const data = JSON.stringify(value);
 
-			if (options.ttl) await storage.setex(key, options.ttl, data);
+			if (options.$ttl) await storage.setex(key, options.$ttl, data);
 			else await storage.set(key, data);
 		},
 		async delete(key) {
