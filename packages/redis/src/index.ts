@@ -11,9 +11,8 @@ export function redisStorage(
 ): Storage {
 	const isInstanceInOption = optionsRaw instanceof Redis;
 	const options = isInstanceInOption ? {} : optionsRaw;
-	options.keyPrefix = options.keyPrefix ?? "@gramio/storage:";
+	// options.keyPrefix = options.keyPrefix;
 	const storage = isInstanceInOption ? optionsRaw : new Redis(options);
-
 
 	return {
 		async get(key) {
