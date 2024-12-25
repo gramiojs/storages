@@ -1,6 +1,6 @@
 {
 	"name": "@gramio/storage-redis",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Redis Storage for GramIO",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
@@ -19,7 +19,7 @@
 	"homepage": "https://github.com/gramiojs/storages",
 	"readme": "https://gramio.dev/storages",
 	"scripts": {
-		"prepublishOnlys": "bunx tsc && bun test && bun ./scripts/release-jsr.ts && bunx pkgroll"
+		"prepublishOnly": "bunx tsc && bun test && bun ./scripts/release-jsr.ts && bunx pkgroll"
 	},
 	"keywords": ["gramio", "gramio-storage", "storage", "redis", "ioredis"],
 	"devDependencies": {
