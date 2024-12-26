@@ -1,5 +1,5 @@
 import type { Storage } from "@gramio/storage";
-import Redis, { type RedisOptions } from "ioredis";
+import { Redis, type RedisOptions } from "ioredis";
 
 export interface RedisStorageOptions extends RedisOptions {
 	/** time to live in seconds */
