@@ -1,13 +1,6 @@
-import { afterAll, beforeAll, describe, expect, it, mock } from "bun:test";
-import RedisMock from "ioredis-mock";
-import { type RedisStorageOptions, redisStorage } from "../src";
+import { describe, expect, it } from "bun:test";
 
-// maybe use real redis instance
-// but it harder to work in other environments
-if (!("USE_REAL_REDIS" in process.env))
-	mock.module("ioredis", () => ({
-		default: RedisMock,
-	}));
+import { type RedisStorageOptions, redisStorage } from "../src";
 
 import Redis from "ioredis";
 
