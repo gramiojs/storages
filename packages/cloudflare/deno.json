@@ -1,0 +1,12 @@
+{
+	"name": "@gramio/storage-cloudflare",
+	"version": "0.0.1",
+	"exports": "./src/index.ts",
+	"publish": {
+		"include": ["deno.json", "src", "README.md", "LICENSE"]
+	},
+	"imports": {
+		"@gramio/storage": "jsr:@gramio/storage@^1.0.0",
+		"ioredis": "npm:ioredis@^5.4.1"
+	}
+}

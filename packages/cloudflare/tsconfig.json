@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"lib": ["ESNext"],
+		"target": "ES2022",
+		"module": "Preserve",
+		"moduleDetection": "force",
+
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		/* Linting */
+		"skipLibCheck": true,
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
+		"esModuleInterop": true,
+		"noEmit": true,
+		"baseUrl": "./src",
+		"rootDir": "./src",
+		"outDir": "./dist"
+	},
+	"include": ["src"]
+}
