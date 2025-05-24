@@ -3,5 +3,5 @@
  *
  * Core of storage adapters.
  */
-export * from "./in-memory-storage.js";
-export * from "./types.js";
+export * from "./in-memory-storage.ts";
+export * from "./types.ts";

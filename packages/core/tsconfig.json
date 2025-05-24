@@ -12,6 +12,7 @@
 		"strict": true,
 		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
+		"allowImportingTsExtensions": true,
 		"noEmit": true,
 		"baseUrl": "./src",
 		"rootDir": "./src",

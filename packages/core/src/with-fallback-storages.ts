@@ -1,4 +1,4 @@
-import type { Storage } from "./types.js";
+import type { Storage } from "./types.ts";
 
 export function withFallbackStorages(storages: Storage[]): Storage {
 	return {
