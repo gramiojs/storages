@@ -6,6 +6,19 @@
         "@biomejs/biome": "1.9.4",
       },
     },
+    "packages/cloudflare": {
+      "name": "@gramio/storage-cloudflare",
+      "version": "0.0.1",
+      "dependencies": {
+        "@cloudflare/workers-types": "^4.20250524.0",
+        "@gramio/storage": "^1.0.0",
+      },
+      "devDependencies": {
+        "@types/bun": "^1.2.8",
+        "pkgroll": "^2.12.1",
+        "typescript": "^5.8.2",
+      },
+    },
     "packages/core": {
       "name": "@gramio/storage",
       "version": "1.0.0",
@@ -55,6 +68,8 @@
     "@biomejs/cli-win32-arm64": ["@biomejs/cli-win32-arm64@1.9.4", "", { "os": "win32", "cpu": "arm64" }, "sha512-tlbhLk+WXZmgwoIKwHIHEBZUwxml7bRJgk0X2sPyNR3S93cdRq6XulAZRQJ17FYGGzWne0fgrXBKpl7l4M87Hg=="],
 
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@1.9.4", "", { "os": "win32", "cpu": "x64" }, "sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA=="],
+
+    "@cloudflare/workers-types": ["@cloudflare/workers-types@4.20250524.0", "", {}, "sha512-Tc/N/5nn3Jq+w7s+QPEgiyBZ0F0ebH9XWQ6YiUZTue79E7nybYDGh4lBCr2y4bC+RYiOP8KZPYWr811Hd3Oh2A=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.25.1", "", { "os": "aix", "cpu": "ppc64" }, "sha512-kfYGy8IdzTGy+z0vFGvExZtxkFlA4zAxgKEahG9KE1ScBjpQnFsNOX8KTU5ojNru5ed5CVoJYXFtoxaq5nFbjQ=="],
 
@@ -107,6 +122,8 @@
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.25.1", "", { "os": "win32", "cpu": "x64" }, "sha512-Y1EQdcfwMSeQN/ujR5VayLOJ1BHaK+ssyk0AEzPjC+t1lITgsnccPqFjb6V+LsTp/9Iov4ysfjxLaGJ9RPtkVg=="],
 
     "@gramio/storage": ["@gramio/storage@workspace:packages/core"],
+
+    "@gramio/storage-cloudflare": ["@gramio/storage-cloudflare@workspace:packages/cloudflare"],
 
     "@gramio/storage-redis": ["@gramio/storage-redis@workspace:packages/redis"],
 

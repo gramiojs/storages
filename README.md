@@ -18,6 +18,13 @@ Storage adapters for GramIO
     [![JSR](https://jsr.io/badges/@gramio/storage-redis)](https://jsr.io/@gramio/storage-redis)
     [![JSR Score](https://jsr.io/badges/@gramio/storage-redis/score)](https://jsr.io/@gramio/storage-redis)
 
+-   [Cloudflare KV](https://developers.cloudflare.com/workers/runtime-apis/kv/)
+
+    [![npm](https://img.shields.io/npm/v/@gramio/storage-cloudflare?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/@gramio/storage-cloudflare)
+    [![npm downloads](https://img.shields.io/npm/dw/@gramio/storage-cloudflare?logo=npm&style=flat&labelColor=000&color=3b82f6)](https://www.npmjs.org/package/@gramio/storage-cloudflare)
+    [![JSR](https://jsr.io/badges/@gramio/storage-cloudflare)](https://jsr.io/@gramio/storage-cloudflare)
+    [![JSR Score](https://jsr.io/badges/@gramio/storage-cloudflare/score)](https://jsr.io/@gramio/storage-cloudflare)
+
 ## TODO:
 
 -   Setup publish workflow for monorepo

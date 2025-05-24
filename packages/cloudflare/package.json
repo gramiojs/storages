@@ -38,6 +38,7 @@
 	},
 	"files": ["dist"],
 	"dependencies": {
+		"@cloudflare/workers-types": "^4.20250524.0",
 		"@gramio/storage": "^1.0.0"
 	}
 }

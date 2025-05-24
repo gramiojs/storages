@@ -7,4 +7,10 @@
 
 Cloudflare storage for GramIO.
 
+```ts
+import { cloudflareStorage } from "@gramio/storage-cloudflare";
+
+const storage = cloudflareStorage(env.KV);
+```
+
 Read more in [documentation](https://gramio.netlify.app/storages/).

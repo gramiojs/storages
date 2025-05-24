@@ -7,6 +7,6 @@
 	},
 	"imports": {
 		"@gramio/storage": "jsr:@gramio/storage@^1.0.0",
-		"ioredis": "npm:ioredis@^5.4.1"
+		"@cloudflare/workers-types": "npm:@cloudflare/workers-types@^4.20250524.0"
 	}
 }
