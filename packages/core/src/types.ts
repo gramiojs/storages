@@ -37,17 +37,24 @@ export type InMemoryStorageMap<T = any> = Map<string, { data: T }>;
  *     };
  * }
  * ```
+ *
+ * @example
+ * ```ts
+ * type T = Record<`Test${number}`, number> & Record<`Something${number}`, string>;
+ * const storage = inMemoryStorage<T>();
+ * const v1 = storage.get("Test1");   // v1: number | undefined
+ * const v2 = storage.get("Something1");  // v2: string | undefined
+ * ```
  * */
 export interface Storage<Data = any> {
 	/**
 	 * `get` value from a storage.
 	 * @example
 	 * ```ts
-	 * const data = await storage.get<string>("key");
+	 * const data = await storage.get("key");
 	 * ```
 	 * */
-	// TODO: allow override return type
-	get<T = Data>(key: string): MaybePromise<Data | undefined>;
+	get<K extends keyof Data>(key: K): MaybePromise<Data[K] | undefined>;
 	/**
 	 * `set` value to a storage by the key.
 	 * @example
@@ -55,7 +62,7 @@ export interface Storage<Data = any> {
 	 * await storage.set("key", { value: true });
 	 * ```
 	 * */
-	set(key: string, value: Data): MaybePromise<void>;
+	set<K extends keyof Data>(key: K, value: Data[K]): MaybePromise<void>;
 	/**
 	 * `has` storage value by the key?
 	 * @example
@@ -63,7 +70,7 @@ export interface Storage<Data = any> {
 	 * const isKeyExists = await storage.has("key");
 	 * ```
 	 * */
-	has(key: string): MaybePromise<boolean>;
+	has<K extends keyof Data>(key: K): MaybePromise<boolean>;
 	/**
 	 * `delete` value from storage by the key.
 	 * @example
@@ -71,5 +78,5 @@ export interface Storage<Data = any> {
 	 * await storage.delete("key");
 	 * ```
 	 * */
-	delete(key: string): MaybePromise<boolean>;
+	delete<K extends keyof Data>(key: K): MaybePromise<boolean>;
 }
