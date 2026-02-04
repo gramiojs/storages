@@ -1,10 +1,10 @@
 import type { InMemoryStorageMap, Storage } from "./types.ts";
 
 /** in memory storage. Can be used by **default** in plugins */
-export function inMemoryStorage<Data = any>(
-	map?: InMemoryStorageMap,
+export function inMemoryStorage<Data extends Record<string, any>>(
+	map?: InMemoryStorageMap<Data[keyof Data]>,
 ): Storage<Data> {
-	const storage: InMemoryStorageMap = map ?? new Map();
+	const storage: InMemoryStorageMap<Data[keyof Data]> = map ?? new Map();
 
 	return {
 		get(key) {

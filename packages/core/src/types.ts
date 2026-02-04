@@ -46,7 +46,7 @@ export type InMemoryStorageMap<T = any> = Map<string, { data: T }>;
  * const v2 = storage.get("Something1");  // v2: string | undefined
  * ```
  * */
-export interface Storage<Data = any> {
+export interface Storage<Data extends Record<string, any> = Record<string, any>> {
 	/**
 	 * `get` value from a storage.
 	 * @example
