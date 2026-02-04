@@ -101,5 +101,8 @@ describe("redisStorage", () => {
 		if (!string) throw new Error("Key not found");
 
 		expect(JSON.parse(string)).toBe("value");
+
+		const redis2 = new Redis();
+		const storage2 = redisStorage(redis2);
 	});
 });
