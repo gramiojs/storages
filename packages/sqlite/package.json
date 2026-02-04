@@ -1,0 +1,9 @@
+{
+  "name": "@gramio/storage-sqlite",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "^1.1.42",
+    "@gramio/storage": "^1.0.0"
+  }
+}
