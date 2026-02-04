@@ -46,8 +46,7 @@ export interface Storage<Data = any> {
 	 * const data = await storage.get<string>("key");
 	 * ```
 	 * */
-	// TODO: allow override return type
-	get<T = Data>(key: string): MaybePromise<Data | undefined>;
+	get<T = Data>(key: string): MaybePromise<T | undefined>;
 	/**
 	 * `set` value to a storage by the key.
 	 * @example
