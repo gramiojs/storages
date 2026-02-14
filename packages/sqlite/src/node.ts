@@ -1,24 +1,31 @@
-import { Database } from "bun:sqlite";
+import { DatabaseSync } from "node:sqlite";
 import type { Storage } from "@gramio/storage";
-import type { Entry, SqliteStorageOptions } from "./types";
+import type { Entry, SqliteStorageBaseOptions } from "./types";
 import { time } from "./utils";
 
+type SqliteConstructor = {
+	filename: string;
+	open?: boolean;
+	readOnly?: boolean;
+	enableForeignKeyConstraints?: boolean;
+};
+
+type SqliteInstance = { db: DatabaseSync };
+
+export type SqliteStorageOptions = (SqliteConstructor | SqliteInstance) &
+	SqliteStorageBaseOptions;
+
 export function sqliteStorage(options: SqliteStorageOptions): Storage {
-	let storage: Database;
+	let storage: DatabaseSync;
 	if ("db" in options) {
 		storage = options.db;
 	} else {
-		options.create ??= true;
-		options.strict ??= true;
-
-		storage = new Database(options.filename, options);
+		storage = new DatabaseSync(options.filename, options);
 	}
 
 	const tableName = options.tableName ?? "gramio_storage";
 
-	// TODO: Think about migrations
 	storage.exec("PRAGMA journal_mode = WAL");
-	// https://en.wikipedia.org/wiki/Year_2038_problem?useskin=vector
 	storage.exec(
 		`CREATE TABLE IF NOT EXISTS ${tableName} (key TEXT PRIMARY KEY, value JSONB NOT NULL, expires_at BIGINT)`,
 	);
@@ -27,19 +34,17 @@ export function sqliteStorage(options: SqliteStorageOptions): Storage {
 		storage.exec(`DELETE FROM ${tableName} WHERE expires_at <= ${time()}`);
 	});
 
-	const getQuery = storage.query<Entry, [string]>(
-		`SELECT * FROM ${tableName} WHERE key = ?`,
-	);
-	const setQuery = storage.query<unknown, [string, string, number | null]>(
+	const getQuery = storage.prepare(`SELECT * FROM ${tableName} WHERE key = ?`);
+	const setQuery = storage.prepare(
 		`INSERT OR REPLACE INTO ${tableName} VALUES (?, ?, ?)`,
 	);
-	const delQuery = storage.query<unknown, [string]>(
+	const delQuery = storage.prepare(
 		`DELETE FROM ${tableName} WHERE key = ? RETURNING key`,
 	);
 
 	return {
 		get(key) {
-			const data = getQuery.get(key);
+			const data = getQuery.get(key) as Entry | undefined;
 			if (!data) return undefined;
 
 			if (data.expires_at && data.expires_at <= time()) {
@@ -64,9 +69,7 @@ export function sqliteStorage(options: SqliteStorageOptions): Storage {
 
 		delete(key) {
 			const result = delQuery.get(key);
-			return result !== null;
+			return result !== undefined;
 		},
 	};
 }
-
-export type { SqliteStorageOptions };

@@ -1,56 +1,54 @@
-import Database from "bun:sqlite";
-import { describe, expect, it } from "bun:test";
-import { type SqliteStorageOptions, sqliteStorage } from "../src/bun";
+import assert from "node:assert/strict";
+import { DatabaseSync } from "node:sqlite";
+import { describe, it } from "node:test";
+import { type SqliteStorageOptions, sqliteStorage } from "../src/node";
 
-const db = new Database(":memory:", {
-	create: true,
-	strict: true,
-});
+const db = new DatabaseSync(":memory:");
 
-describe("sqliteStorage", () => {
+describe("sqliteStorage (node)", () => {
 	it("should set and get a value", async () => {
 		const storage = sqliteStorage({ db });
 		await storage.set("key1", "value1");
 		const value = await storage.get("key1");
-		expect(value).toBe("value1");
+		assert.strictEqual(value, "value1");
 	});
 
 	it("should return undefined for a non-existent key", async () => {
 		const storage = sqliteStorage({ db });
 		const value = await storage.get("nonExistentKey");
-		expect(value).toBeUndefined();
+		assert.strictEqual(value, undefined);
 	});
 
 	it("should check if a key exists", async () => {
 		const storage = sqliteStorage({ db });
 		await storage.set("key2", "value2");
 		const exists = await storage.has("key2");
-		expect(exists).toBeTrue();
+		assert.strictEqual(exists, true);
 		const nonExistent = await storage.has("nonExistentKey");
-		expect(nonExistent).toBeFalse();
+		assert.strictEqual(nonExistent, false);
 	});
 
 	it("should delete a key", async () => {
 		const storage = sqliteStorage({ db });
 		await storage.set("key3", "value3");
 		const existsBeforeDelete = await storage.has("key3");
-		expect(existsBeforeDelete).toBeTrue();
+		assert.strictEqual(existsBeforeDelete, true);
 		await storage.delete("key3");
 		const existsAfterDelete = await storage.has("key3");
-		expect(existsAfterDelete).toBeFalse();
+		assert.strictEqual(existsAfterDelete, false);
 	});
 
 	it("should return true when deleting an existing key", async () => {
 		const storage = sqliteStorage({ db });
 		await storage.set("key4", "value4");
 		const result = await storage.delete("key4");
-		expect(result).toBeTrue();
+		assert.strictEqual(result, true);
 	});
 
 	it("should return false when deleting a non-existent key", async () => {
 		const storage = sqliteStorage({ db });
 		const result = await storage.delete("nonExistentKey");
-		expect(result).toBeFalse();
+		assert.strictEqual(result, false);
 	});
 
 	it("should set and get a complex object", async () => {
@@ -66,7 +64,7 @@ describe("sqliteStorage", () => {
 
 		await storage.set("complexKey", complexObject);
 		const retrievedObject = await storage.get("complexKey");
-		expect(retrievedObject).toEqual(complexObject);
+		assert.deepStrictEqual(retrievedObject, complexObject);
 	});
 
 	it("should respect the TTL option", async () => {
@@ -78,12 +76,12 @@ describe("sqliteStorage", () => {
 
 		await storage.set("ttlKey", "ttlValue");
 		const existsBeforeTTL = await storage.has("ttlKey");
-		expect(existsBeforeTTL).toBeTrue();
+		assert.strictEqual(existsBeforeTTL, true);
 
 		// Wait for TTL to expire
 		await new Promise((resolve) => setTimeout(resolve, 1100));
 
 		const existsAfterTTL = await storage.has("ttlKey");
-		expect(existsAfterTTL).toBeFalse();
+		assert.strictEqual(existsAfterTTL, false);
 	});
 });
