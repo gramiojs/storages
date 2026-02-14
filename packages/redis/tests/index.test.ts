@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 
-import { type RedisStorageOptions, redisStorage } from "../src";
+import { type RedisStorageOptions, redisStorage } from "../src/ioredis";
 
 import Redis from "ioredis";
 

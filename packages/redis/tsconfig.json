@@ -8,15 +8,13 @@
 		/* Bundler mode */
 		"moduleResolution": "bundler",
 		/* Linting */
+		"types": ["bun-types"],
 		"skipLibCheck": true,
 		"strict": true,
 		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
 		"esModuleInterop": true,
-		"noEmit": true,
-		"baseUrl": "./src",
-		"rootDir": "./src",
-		"outDir": "./dist"
+		"noEmit": true
 	},
 	"include": ["src"]
 }
