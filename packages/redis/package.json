@@ -19,6 +19,20 @@
 				"types": "./dist/ioredis.d.cts",
 				"default": "./dist/ioredis.cjs"
 			}
+		},
+		"./ioredis": {
+			"import": {
+				"types": "./dist/ioredis.d.ts",
+				"default": "./dist/ioredis.js"
+			},
+			"require": {
+				"types": "./dist/ioredis.d.cts",
+				"default": "./dist/ioredis.cjs"
+			}
+		},
+		"./bun": {
+			"types": "./dist/bun.d.ts",
+			"default": "./dist/bun.js"
 		}
 	},
 	"type": "module",
