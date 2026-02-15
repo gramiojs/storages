@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import { describe, it } from "node:test";
-import { type SqliteStorageOptions, sqliteStorage } from "../src/node";
+import { type SqliteStorageOptions, sqliteStorage } from "../dist/node.js";
 
 const db = new DatabaseSync(":memory:");
 

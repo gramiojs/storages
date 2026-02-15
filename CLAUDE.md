@@ -6,6 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Monorepo of storage adapters for [GramIO](https://gramio.dev) (Telegram bot framework). Provides a unified `Storage` interface with multiple backend implementations. Published to both NPM and JSR.
 
+## Development Workflow
+
+**After making changes to code:**
+1. **Type check:** `bunx tsc --noEmit` (from package directory)
+2. **Run tests:** `bun test` (from package or root directory)
+3. **For sqlite package:** Also run Node.js tests after building:
+   ```bash
+   bunx pkgroll && node --test tests/node.test.ts
+   ```
+
+**Before publishing:** The `prepublishOnly` script automatically runs type checking, builds, and runs all tests.
+
 ## Commands
 
 **Install dependencies:**
@@ -22,6 +34,7 @@ bun test
 ```bash
 bun test packages/core/tests/
 bun test packages/redis/tests/
+bun test packages/sqlite/tests/
 ```
 
 **Run a single test file:**
@@ -33,6 +46,17 @@ bun test packages/core/tests/index.test.ts
 ```bash
 USE_REAL_REDIS=1 bun test packages/redis/tests/
 ```
+
+**SQLite tests (dual runtime support):**
+```bash
+# Run only Bun runtime tests
+bun test packages/sqlite/tests/index.test.ts
+
+# Run Node.js tests with Node.js native test runner (requires build first)
+cd packages/sqlite && bunx pkgroll && node --test tests/node.test.ts
+```
+
+**Note:** Node.js tests require the package to be built first because they import from `dist/node.js`. The `prepublishOnly` script handles this automatically.
 
 **Lint and format:**
 ```bash
@@ -58,7 +82,7 @@ Bun workspaces with 4 packages under `packages/`:
 - **`core`** (`@gramio/storage`) — Core `Storage<Data>` interface, `inMemoryStorage`, and `withFallbackStorages` wrapper
 - **`redis`** (`@gramio/storage-redis`) — Redis adapter using `ioredis` (peer dep), supports TTL
 - **`cloudflare`** (`@gramio/storage-cloudflare`) — Cloudflare Workers KV adapter
-- **`sqlite`** (`@gramio/storage-sqlite`) — Bun-only SQLite adapter with TTL support
+- **`sqlite`** (`@gramio/storage-sqlite`) — SQLite adapter with dual runtime support (Bun and Node.js), includes TTL support
 
 ### The Storage Interface
 
@@ -93,4 +117,7 @@ Each adapter accepts either raw options or an existing client instance (redis ac
 
 - Uses Bun's built-in test runner (`bun:test`) with `describe`/`it`/`expect`
 - Redis tests mock `ioredis` via `ioredis-mock` in `tests/preload.ts` (bypassed with `USE_REAL_REDIS` env var)
-- SQLite tests use in-memory databases
+- SQLite tests use in-memory databases and have dual runtime support:
+  - `tests/index.test.ts` — Tests Bun runtime using `bun:sqlite` and `bun:test` (imports from `src/bun.ts`)
+  - `tests/node.test.ts` — Tests Node.js runtime using `node:sqlite` and `node:test` (imports from `dist/node.js`, requires build)
+  - The `prepublishOnly` script runs: typecheck → build → bun tests → node tests

@@ -1,6 +1,6 @@
 {
 	"name": "@gramio/storage-sqlite",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "SQLite Storage for GramIO (supports Bun and Node.js)",
 	"type": "module",
 	"exports": {
@@ -19,16 +19,19 @@
 			}
 		}
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"homepage": "https://github.com/gramiojs/storages",
 	"readme": "https://gramio.dev/storages",
 	"scripts": {
-		"prepublishOnly": "bunx tsc && bun test && bunx pkgroll"
+		"prepublishOnly": "bunx tsc && bunx pkgroll && bun test tests/index.test.ts && node --test tests/node.test.ts"
 	},
 	"keywords": ["gramio", "gramio-storage", "storage", "sqlite"],
 	"license": "MIT",
 	"devDependencies": {
 		"@types/bun": "^1.2.15",
-		"@types/node": ">=22.13.0",
+		"@types/node": "22",
 		"pkgroll": "^2.12.1",
 		"typescript": "^5.8.2"
 	},
