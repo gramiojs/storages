@@ -11,24 +11,26 @@ import type { Storage } from "@gramio/storage";
  * @param kv - The Cloudflare KV namespace
  * @returns A storage adapter for Cloudflare KV
  */
-export function cloudflareStorage(kv: KVNamespace): Storage {
+export function cloudflareStorage<Data extends Record<string, any>>(
+	kv: KVNamespace,
+): Storage<Data> {
 	return {
-		get: async <T = any>(key: string): Promise<T | undefined> => {
-			const value = await kv.get<T>(key, "json");
+		async get<K extends keyof Data>(key: K): Promise<Data[K] | undefined> {
+			const value = await kv.get<Data[K]>(String(key), "json");
 
 			return value ?? undefined;
 		},
-		set: async (key: string, value: any): Promise<void> => {
-			await kv.put(key, JSON.stringify(value));
+		async set<K extends keyof Data>(key: K, value: Data[K]): Promise<void> {
+			await kv.put(String(key), JSON.stringify(value));
 		},
-		has: async (key: string): Promise<boolean> => {
-			const value = await kv.get(key);
+		async has<K extends keyof Data>(key: K): Promise<boolean> {
+			const value = await kv.get(String(key));
 
 			return value !== null;
 		},
-		delete: async (key: string): Promise<boolean> => {
+		async delete<K extends keyof Data>(key: K): Promise<boolean> {
 			try {
-				await kv.delete(key);
+				await kv.delete(String(key));
 
 				return true;
 			} catch {

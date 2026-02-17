@@ -103,15 +103,3 @@ storage.set("Something1", "hello"); // value must be string
 const v1 = storage.get("Test1"); // v1: number | undefined
 const v2 = storage.get("Something1"); // v2: string | undefined
 ```
-
-Works for unions and interfaces too:
-
-```ts
-type Complex =
-    | Record<`user:${number}`, { name: string; age: number }>
-    | Record<`session:${string}`, { token: string; expires: number }>;
-
-const s = inMemoryStorage<Complex>();
-s.set("user:1", { name: "Alice", age: 30 });
-s.set("session:abc", { token: "xyz", expires: 1234567890 });
-```

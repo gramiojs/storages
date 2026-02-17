@@ -1,5 +1,6 @@
 import type { Storage } from "@gramio/storage";
-import { RedisClient, type RedisOptions } from "bun";
+import type { RedisOptions } from "bun";
+import { RedisClient } from "bun";
 
 export interface RedisStorageOptions extends RedisOptions {
 	url?: string;
@@ -7,9 +8,9 @@ export interface RedisStorageOptions extends RedisOptions {
 	$ttl?: number;
 }
 
-export function redisStorage(
+export function redisStorage<Data extends Record<string, any>>(
 	optionsRaw: RedisStorageOptions | RedisClient = {},
-): Storage {
+): Storage<Data> {
 	const isInstance = optionsRaw instanceof RedisClient;
 	const options = isInstance ? {} : optionsRaw;
 	const storage = isInstance
@@ -17,22 +18,23 @@ export function redisStorage(
 		: new RedisClient(options.url, options);
 
 	return {
-		async get(key) {
-			const data = await storage.get(key);
+		async get<K extends keyof Data>(key: K) {
+			const data = await storage.get(String(key));
 
-			return data ? JSON.parse(data) : undefined;
+			return data ? (JSON.parse(data) as Data[K]) : undefined;
 		},
-		async has(key) {
-			return !!(await storage.get(key));
+		async has<K extends keyof Data>(key: K) {
+			return !!(await storage.get(String(key)));
 		},
-		async set(key, value) {
+		async set<K extends keyof Data>(key: K, value: Data[K]) {
 			const data = JSON.stringify(value);
 
-			if (options.$ttl) await storage.set(key, data, "EX", options.$ttl);
-			else await storage.set(key, data);
+			if (options.$ttl)
+				await storage.set(String(key), data, "EX", options.$ttl);
+			else await storage.set(String(key), data);
 		},
-		async delete(key) {
-			const result = await storage.del(key);
+		async delete<K extends keyof Data>(key: K) {
+			const result = await storage.del(String(key));
 
 			return result === 1;
 		},

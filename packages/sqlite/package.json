@@ -1,6 +1,6 @@
 {
 	"name": "@gramio/storage-sqlite",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "SQLite Storage for GramIO (supports Bun and Node.js)",
 	"type": "module",
 	"exports": {
@@ -37,6 +37,6 @@
 	},
 	"files": ["dist"],
 	"dependencies": {
-		"@gramio/storage": "^1.0.0"
+		"@gramio/storage": "^2.0.1"
 	}
 }

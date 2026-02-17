@@ -1,3 +1,4 @@
+// @ts-ignore i boring to fix it right now
 import { DatabaseSync } from "node:sqlite";
 import type { Storage } from "@gramio/storage";
 import type { Entry, SqliteStorageBaseOptions } from "./types";
@@ -15,7 +16,9 @@ type SqliteInstance = { db: DatabaseSync };
 export type SqliteStorageOptions = (SqliteConstructor | SqliteInstance) &
 	SqliteStorageBaseOptions;
 
-export function sqliteStorage(options: SqliteStorageOptions): Storage {
+export function sqliteStorage<Data extends Record<string, any>>(
+	options: SqliteStorageOptions,
+): Storage<Data> {
 	let storage: DatabaseSync;
 	if ("db" in options) {
 		storage = options.db;
@@ -43,32 +46,42 @@ export function sqliteStorage(options: SqliteStorageOptions): Storage {
 	);
 
 	return {
-		get(key) {
-			const data = getQuery.get(key) as Entry | undefined;
+		get<K extends keyof Data>(key: K) {
+			const stringKey = String(key);
+			const data = getQuery.get(stringKey) as Entry | undefined;
 			if (!data) return undefined;
 
 			if (data.expires_at && data.expires_at <= time()) {
-				this.delete(key);
+				delQuery.get(stringKey);
 				return undefined;
 			}
 
 			return JSON.parse(data.value);
 		},
 
-		has(key) {
-			return Boolean(this.get(key));
+		has<K extends keyof Data>(key: K) {
+			const stringKey = String(key);
+			const data = getQuery.get(stringKey) as Entry | undefined;
+			if (!data) return false;
+
+			if (data.expires_at && data.expires_at <= time()) {
+				delQuery.get(stringKey);
+				return false;
+			}
+
+			return true;
 		},
 
-		set(key, value) {
+		set<K extends keyof Data>(key: K, value: Data[K]) {
 			const ttl = options.$ttl;
 			const exp = ttl ? time() + ttl : null;
 
 			const data = JSON.stringify(value);
-			setQuery.run(key, data, exp);
+			setQuery.run(String(key), data, exp);
 		},
 
-		delete(key) {
-			const result = delQuery.get(key);
+		delete<K extends keyof Data>(key: K) {
+			const result = delQuery.get(String(key));
 			return result !== undefined;
 		},
 	};

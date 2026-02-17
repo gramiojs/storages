@@ -1,6 +1,6 @@
 {
 	"name": "@gramio/storage-redis",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Redis Storage for GramIO",
 	"main": "./dist/ioredis.cjs",
 	"module": "./dist/ioredis.js",
@@ -39,20 +39,20 @@
 	"homepage": "https://github.com/gramiojs/storages",
 	"readme": "https://gramio.dev/storages",
 	"scripts": {
-		"prepublishOnly": "bunx tsc && bun test && bun ./scripts/release-jsr.ts && bunx pkgroll"
+		"prepublishOnly": "bunx tsc && bun test && bunx pkgroll"
 	},
 	"keywords": ["gramio", "gramio-storage", "storage", "redis", "ioredis"],
 	"license": "MIT",
 	"devDependencies": {
 		"@types/bun": "^1.2.15",
-		"ioredis-mock": "^8.9.0",
-		"pkgroll": "^2.12.1",
-		"typescript": "^5.8.2",
-		"ioredis": "^5.6.1"
+		"ioredis-mock": "^8.13.1",
+		"pkgroll": "^2.26.0",
+		"typescript": "^5.9.3",
+		"ioredis": "^5.9.3"
 	},
 	"files": ["dist"],
 	"dependencies": {
-		"@gramio/storage": "^1.0.0"
+		"@gramio/storage": "^2.0.1"
 	},
 	"peerDependencies": {
 		"ioredis": "^5.6.1"
